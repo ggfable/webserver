@@ -11,6 +11,7 @@ services:
       - ./site/public:/app/public
     depends_on:
       - php-fpm
+      
   php-fpm:
     build:
       context: site/docker/development/php-fpm
