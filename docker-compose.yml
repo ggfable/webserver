@@ -1,18 +1,18 @@
-version: '3.8'
-services: 
-    nginx:
-        build:
-            context: site/docker/development/nginx
-        ports: 
-            - "8080:80"
-        volumes: 
-            - ./site:/app
-            - ./site/docker/development/nginx/conf.d:/etc/nginx/conf.d
-            - ./site/public:/app/public
-        depends_on: 
-            - php-fpm
-    php-fpm:
-        build:
-            context: site/docker/development/php-fpm
-        volumes: 
-            - ./site:/app
+version: "3.8"
+services:
+  nginx:
+    build:
+      context: site/docker/development/nginx
+    ports:
+      - "${PORT}:80"
+    volumes:
+      - ./site:/app
+      - ./site/docker/development/nginx/conf.d:/etc/nginx/conf.d
+      - ./site/public:/app/public
+    depends_on:
+      - php-fpm
+  php-fpm:
+    build:
+      context: site/docker/development/php-fpm
+    volumes:
+      - ./site:/app
