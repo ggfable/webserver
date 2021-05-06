@@ -3,6 +3,7 @@ up: docker-up
 down: docker-down
 restart: docker-down docker-up
 clear: docker-down-clear
+clean: docker-down-clean
 
 docker-up:
 	docker-compose up -d
@@ -18,3 +19,6 @@ docker-pull:
 
 docker-build:
 	docker-compose build --pull
+
+docker-down-clean:
+	docker-compose down --remove-orphans
