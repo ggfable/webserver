@@ -1,3 +1,3 @@
 <?php
- echo('HELLO REBYATKI');
+ echo('HELLO REBYATIWKI');
 ?>
