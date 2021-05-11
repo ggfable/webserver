@@ -4,48 +4,16 @@ services:
     build:
       context: site/docker/development/nginx
     ports:
-      - "${PORT}:8090"
+      - "${PORT}:80"
     volumes:
       - ./site:/app
       - ./site/docker/development/nginx/conf.d:/etc/nginx/conf.d
       - ./site/public:/app/public
-      - php-fpm-data:/etc/php-fpm
-      - nginx-data:/etc/nginx
-      - docker-certs:/certs/client:ro
     depends_on:
       - php-fpm
-
-    environment:
-      DOCKER_HOST: tcp://docker:2376
-      DOCKER_CERT_PATH: /certs/client
-      DOCKER_TLS_VERIFY: 1
       
   php-fpm:
     build:
       context: site/docker/development/php-fpm
     volumes:
       - ./site:/app
-      - php-fpm-data:/etc/php-fpm
-      - nginx-data:/etc/nginx
-      - docker-certs:/certs/client:ro
-    environment:
-      DOCKER_HOST: tcp://docker:2376
-      DOCKER_CERT_PATH: /certs/client
-      DOCKER_TLS_VERIFY: 1
-
-  docker:
-    image: docker:dind
-    privileged: true
-    environment:
-      DOCKER_TLS_CERTDIR: /certs
-    volumes:
-      - nginx-data:/etc/nginx
-      - php-fpm-data:/etc/php-fpm
-      - docker-certs:/certs/client
-      - docker-data:/var/lib/docker
-
-volumes:
-  docker-data:
-  docker-certs:
-  nginx-data:
-  php-fpm-data:
