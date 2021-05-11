@@ -4,7 +4,7 @@ services:
     build:
       context: site/docker/development/nginx
     ports:
-      - "${PORT}:80"
+      - "${PORT}:8090"
     volumes:
       - ./site:/app
       - ./site/docker/development/nginx/conf.d:/etc/nginx/conf.d
